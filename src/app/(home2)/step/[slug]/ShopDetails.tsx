@@ -9,8 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { FaArrowRightLong, FaFacebookF } from "react-icons/fa6";
-import { FaCheckCircle, FaMinus, FaPlus, FaWhatsapp } from "react-icons/fa";
+import { FaMinus, FaPlus, FaWhatsapp } from "react-icons/fa";
 
 import {
   Carousel,
@@ -29,7 +28,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Check, CheckCircle, User } from "lucide-react";
+import { CheckCircle, User } from "lucide-react";
 
 type ShippingOption = "dhakaCity" | "dhakaCityOuter" | "outsideDhaka";
 type PaymentOption = "cash" | "bkash";

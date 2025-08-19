@@ -49,9 +49,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Borkotmoy Ponno",
-  description:
-    "Borkotmoy Ponno is an e-commerce platform that specializes in selling organic and natural products, including food items, cosmetics, and household goods. The platform aims to provide customers with high-quality, eco-friendly products sourced from trusted suppliers.",
+  title: "Modify",
+  description: "Modnity description",
 };
 
 export default function RootLayout({
@@ -65,7 +64,7 @@ export default function RootLayout({
 
       <ReduxWrapper>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${montserrat.className} ${roboto.variable} ${caladea.variable} ${tiro_bangla.variable} antialiased `}
+          className={`${geistSans.variable} ${geistMono.variable} ${montserrat.className} ${roboto.variable} ${caladea.variable} ${tiro_bangla.variable} antialiased  `}
         >
           <GTMPageViewTracker />
           <RightClickDisable />

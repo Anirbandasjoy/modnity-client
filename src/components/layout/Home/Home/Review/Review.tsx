@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Quote, User, Star } from "lucide-react";
+import { User } from "lucide-react";
 import { useHandleGetAllReviewQuery } from "@/redux/features/review/reviewApi";
 import {
   Carousel,
@@ -12,21 +12,21 @@ import {
   CarouselPreviousReview,
 } from "@/components/ui/carousel";
 
-const StarRating = ({ rating }: { rating: number }) => {
-  return (
-    <div className="flex gap-1">
-      {[...Array(5)].map((_, index) => (
-        <Star
-          key={index}
-          size={16}
-          className={`${
-            index < rating ? "text-[#FF8A00] fill-[#FF8A00]" : "text-gray-300"
-          } transition-colors duration-200`}
-        />
-      ))}
-    </div>
-  );
-};
+// const StarRating = ({ rating }: { rating: number }) => {
+//   return (
+//     <div className="flex gap-1">
+//       {[...Array(5)].map((_, index) => (
+//         <Star
+//           key={index}
+//           size={16}
+//           className={`${
+//             index < rating ? "text-[#FF8A00] fill-[#FF8A00]" : "text-gray-300"
+//           } transition-colors duration-200`}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
 
 export default function Review() {
   const { data, isLoading, error } = useHandleGetAllReviewQuery({ search: "" });
@@ -98,8 +98,8 @@ export default function Review() {
             ))}
           </CarouselContent>
           <div className="flex justify-center gap-4 mt-8">
-            <CarouselPreviousReview/>
-            <CarouselNextReview/>
+            <CarouselPreviousReview />
+            <CarouselNextReview />
           </div>
         </Carousel>
       </div>

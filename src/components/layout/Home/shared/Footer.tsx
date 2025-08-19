@@ -45,7 +45,6 @@ export default function Footer() {
     <footer className="text-gray-900  relative overflow-hidden mt-28">
       {/* Background Decorations */}
 
-
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
@@ -57,7 +56,7 @@ export default function Footer() {
         <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
-      <div className=" px-4 sm:px-6 lg:px-8 ">
+      <div className=" px-4 sm:px-6 lg:px-8  ">
         {/* Main Footer Content */}
         <div className="py-12 sm:py-16 lg:py-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">

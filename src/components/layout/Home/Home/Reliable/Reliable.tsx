@@ -1,32 +1,30 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { CheckCircle, Phone, Leaf, Shield, Heart, Award } from "lucide-react";
 
 export default function ReliableOrganicStore() {
-const features = [
-  {
-    title: "সুস্থ ও প্রাকৃতিক খাবার, স্বাস্থ্যসচেতনদের জন্য",
-  },
-  {
-    title: "প্রতিদিনের তাজা ও গুণগতমানসম্পন্ন পণ্যের নিশ্চয়তা।",
-  },
-  {
-    title: "রোগপ্রতিরোধে সহায়ক ভেষজ উপাদানসমূহ।",
-  },
-  {
-    title: "বিজ্ঞানসম্মত প্যাকেজিং ও সঠিক সংরক্ষণ।",
-  },
-  {
-    title: "বিশ্বস্ত উৎস থেকে সংগ্রহ করা অরগানিক খাদ্য।",
-  },
-  {
-    title: "সহজ অনলাইন অর্ডার ও দ্রুত হোম ডেলিভারি।",
-  },
-  {
-    title: "পরিবেশবান্ধব ও টেকসই কৃষি পণ্যের সমাহার।",
-  },
-];
-
+  const features = [
+    {
+      title: "সুস্থ ও প্রাকৃতিক খাবার, স্বাস্থ্যসচেতনদের জন্য",
+    },
+    {
+      title: "প্রতিদিনের তাজা ও গুণগতমানসম্পন্ন পণ্যের নিশ্চয়তা।",
+    },
+    {
+      title: "রোগপ্রতিরোধে সহায়ক ভেষজ উপাদানসমূহ।",
+    },
+    {
+      title: "বিজ্ঞানসম্মত প্যাকেজিং ও সঠিক সংরক্ষণ।",
+    },
+    {
+      title: "বিশ্বস্ত উৎস থেকে সংগ্রহ করা অরগানিক খাদ্য।",
+    },
+    {
+      title: "সহজ অনলাইন অর্ডার ও দ্রুত হোম ডেলিভারি।",
+    },
+    {
+      title: "পরিবেশবান্ধব ও টেকসই কৃষি পণ্যের সমাহার।",
+    },
+  ];
 
   const stats = [
     { icon: Shield, label: "১০০% নিরাপদ", value: "Certified" },
@@ -36,7 +34,10 @@ const features = [
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50 px-[5%] py-16 lg:py-24" style={{ fontFamily: 'SolaimanLipi' }}>
+    <section
+      className="relative overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50 px-[5%] py-16 lg:py-24"
+      style={{ fontFamily: "SolaimanLipi" }}
+    >
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-green-100 rounded-full opacity-20 blur-3xl"></div>
@@ -89,7 +90,10 @@ const features = [
           </div>
 
           {/* Content Section */}
-          <div className="order-1 lg:order-2 space-y-3 flex-1 font-tiro_bangla" style={{ fontFamily: 'SolaimanLipi' }}>
+          <div
+            className="order-1 lg:order-2 space-y-3 flex-1 font-tiro_bangla"
+            style={{ fontFamily: "SolaimanLipi" }}
+          >
             {/* Header */}
             <div className="space-y-2">
               <div className="inline-flex items-center space-x-2 bg-forest-green text-gray-200 px-4 py-2 rounded-full text-sm font-medium">
@@ -112,12 +116,12 @@ const features = [
             {/* Features */}
             <div className="space-y-1">
               {features.map((feature, index) => (
-                  <div className="flex items-start space-x-2" key={index}>
-                    <div className="flex-shrink-0 w-4 h-4 bg-forest-green rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle className="w-3 h-3 text-white " />
-                    </div>
-                    <p className="text-gray-800">{feature.title}</p>
+                <div className="flex items-start space-x-2" key={index}>
+                  <div className="flex-shrink-0 w-4 h-4 bg-forest-green rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle className="w-3 h-3 text-white " />
                   </div>
+                  <p className="text-gray-800">{feature.title}</p>
+                </div>
               ))}
             </div>
 
@@ -131,7 +135,9 @@ const features = [
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-medium font-montserrat">+8801342-106348</div>
+                  <div className="font-medium font-montserrat">
+                    +8801342-106348
+                  </div>
                 </div>
               </a>
             </div>

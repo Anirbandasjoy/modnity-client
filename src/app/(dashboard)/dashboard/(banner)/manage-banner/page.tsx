@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import {
-    useHandleChangeOrderBannerMutation,
+  useHandleChangeOrderBannerMutation,
   useHandleDeleteBannerMutation,
   useHandleFindBannerQuery,
 } from "@/redux/features/banner/bannerApi";
@@ -37,7 +37,7 @@ const ManagePage = () => {
 
   const { data, refetch, isLoading } = useHandleFindBannerQuery({});
   const [handleChangeOrderBanner] = useHandleChangeOrderBannerMutation();
-  const allData: IData[] = data?.payload || [];
+  const allData: IData[] = React.useMemo(() => data?.payload || [], [data]);
 
   const [handleDeleteBanner, { isLoading: isDeleting }] =
     useHandleDeleteBannerMutation();
@@ -80,19 +80,17 @@ const ManagePage = () => {
     updated.splice(hoverIndex, 0, removed);
     setBannerData(updated);
     const payload = {
-        banners:[
-            ...updated.map((item, index) => ({
-                _id: item._id,
-                order: index + 1, // Assuming order is 1-based index
-            })),
-        ]
-    }
-   
+      banners: [
+        ...updated.map((item, index) => ({
+          _id: item._id,
+          order: index + 1, // Assuming order is 1-based index
+        })),
+      ],
+    };
+
     await handleChangeOrderBanner(payload).unwrap();
   };
 
-
-  
   const handleExport = () => {
     exportToExcel(bannerData, "Banner_List");
   };

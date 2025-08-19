@@ -8,19 +8,24 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-[#F5F5F5] text-[#1A1A1A]">
+    <div
+      className=" bg-[#f1e8c859]
+
+ text-[#1A1A1A]"
+    >
       <Topbar />
-      <div className=" max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <Navbar />
         <div className="min-h-[50vh]">{children}</div>
 
-        
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.05),transparent)] pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(251,191,36,0.03),transparent)] pointer-events-none" />
-
+        {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.05),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(251,191,36,0.03),transparent)] pointer-events-none" /> */}
+      </div>
+      <div className="bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.05),transparent)] pointer-events-none">
+        <div className="max-w-7xl mx-auto">
           <Footer />
         </div>
-     
+      </div>
     </div>
   );
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselApi,
 } from "@/components/ui/carousel";
 import { useHandleFindBannerQuery } from "@/redux/features/banner/bannerApi";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -31,6 +32,7 @@ export default function Banner() {
   console.log(images);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [api, setApi] = useState<CarouselApi>();
 
   const plugin = useRef(
     Autoplay({
@@ -48,6 +50,22 @@ export default function Banner() {
     }
     setIsPlaying(!isPlaying);
   };
+
+  const handleSlideChange = useCallback(() => {
+    if (!api) return;
+    setCurrentIndex(api.selectedScrollSnap());
+  }, [api]);
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    handleSlideChange();
+    api.on("select", handleSlideChange);
+
+    return () => {
+      api.off("select", handleSlideChange);
+    };
+  }, [api, handleSlideChange]);
 
   // Loading skeleton
   if (isLoading) {
@@ -86,19 +104,13 @@ export default function Banner() {
       <div className="px-4 sm:px-6 lg:px-0">
         <div className="relative">
           <Carousel
+            setApi={setApi}
             plugins={[plugin.current]}
             opts={{
               loop: true,
               align: "center",
             }}
             className="relative group"
-            onSelect={() => {
-              // Update current index for indicators
-              const emblaApi = plugin.current.emblaApi;
-              if (emblaApi) {
-                setCurrentIndex(emblaApi.selectedScrollSnap());
-              }
-            }}
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {images.map((image, index) => (
@@ -219,7 +231,7 @@ export default function Banner() {
                       : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
                   }`}
                   onClick={() => {
-                    plugin.current.emblaApi?.scrollTo(index);
+                    api?.scrollTo(index);
                   }}
                 />
               ))}
