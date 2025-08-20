@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
       "i.ibb.com",
       "example.com",
       "th.bing.com",
+      "i.ibb.co.com",
+      "images.unsplash.com"
     ],
   },
   

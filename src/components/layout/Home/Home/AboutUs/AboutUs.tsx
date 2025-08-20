@@ -31,7 +31,7 @@ export default function AboutUs() {
                 Our Story
               </span>
             </div>
-           
+
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               Discover the passion and craftsmanship behind every piece we
               create
@@ -47,7 +47,7 @@ export default function AboutUs() {
                 <div className="relative group">
                   <div className="bg-white p-2 rounded-2xl shadow-lg">
                     <Image
-                      src="/a1.png"
+                      src="https://i.ibb.co.com/0Vr4fNz5/main-Image-1.webp"
                       alt="Our Craftsmanship"
                       width={400}
                       height={300}
@@ -63,7 +63,7 @@ export default function AboutUs() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white p-2 rounded-xl shadow-md">
                     <Image
-                      src="/a2.png"
+                      src="https://images.unsplash.com/photo-1669257966198-5243002b0ca8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                       alt="Our Heritage"
                       width={200}
                       height={200}
@@ -87,7 +87,7 @@ export default function AboutUs() {
                   <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20 rounded-2xl transform rotate-1 group-hover:rotate-3 transition-transform duration-500" />
                   <div className="relative bg-white p-2 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-500">
                     <Image
-                      src="/a1.png"
+                      src="https://i.ibb.co.com/0Vr4fNz5/main-Image-1.webp"
                       alt="Our Craftsmanship"
                       width={600}
                       height={400}
@@ -104,7 +104,7 @@ export default function AboutUs() {
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-xl transform -rotate-1 group-hover:-rotate-2 transition-transform duration-500" />
                   <div className="relative bg-white p-2 rounded-xl shadow-md group-hover:shadow-lg transition-all duration-500">
                     <Image
-                      src="/a2.png"
+                      src="https://images.unsplash.com/photo-1669257966198-5243002b0ca8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                       alt="Our Heritage"
                       width={300}
                       height={300}
