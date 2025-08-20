@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { ChevronRight, Home, Sparkles } from "lucide-react";
 
-export function CartBreadcrumb() {
+export function COntactBreadcrumb() {
   return (
     <div className="w-full py-6">
       <div className="px-4 sm:px-6">
@@ -22,7 +22,7 @@ export function CartBreadcrumb() {
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text">
-                  Cart
+                  Contact
                 </h1>
               </div>
 
@@ -31,9 +31,10 @@ export function CartBreadcrumb() {
             </div>
 
             {/* Clean subtitle */}
-            <p className="text-sm sm:text-base text-gray-600 px-4 max-w-xl mx-auto">
-              Your <span className="text-amber-600 font-semibold">Modnity</span>{" "}
-              ornaments cart — review and manage your selected items with ease.
+            <p className="text-sm sm:text-base text-gray-600 px-4 max-w-2xl mx-auto">
+              <span className="text-amber-600 font-semibold">Modnity</span> Have
+              questions about our premium ornaments? We&#39;d love to hear from you.
+              Get in touch and let&#39;s create something beautiful together.
             </p>
           </div>
 
@@ -66,7 +67,7 @@ export function CartBreadcrumb() {
                   <BreadcrumbPage className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white">
                     <Sparkles className="w-4 h-4 text-white" />
                     <span className="text-sm sm:text-base font-semibold">
-                      Cart
+                      Contact
                     </span>
                   </BreadcrumbPage>
                 </BreadcrumbItem>

@@ -21,7 +21,7 @@ export default function HomeLayout({
         {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.05),transparent)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(251,191,36,0.03),transparent)] pointer-events-none" /> */}
       </div>
-      <div className="bg-[radial-gradient(circle_at_30%_20%,rgba(251,191,36,0.05),transparent)] pointer-events-none">
+      <div className="bg-[#fef3c747]">
         <div className="max-w-7xl mx-auto">
           <Footer />
         </div>

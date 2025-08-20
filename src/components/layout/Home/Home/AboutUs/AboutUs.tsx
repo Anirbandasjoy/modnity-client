@@ -31,13 +31,7 @@ export default function AboutUs() {
                 Our Story
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
-              About
-              <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                {" "}
-                Our Journey
-              </span>
-            </h1>
+           
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               Discover the passion and craftsmanship behind every piece we
               create

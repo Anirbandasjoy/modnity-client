@@ -13,7 +13,7 @@ import {
 import { useHandleFindBannerQuery } from "@/redux/features/banner/bannerApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import Autoplay from "embla-carousel-autoplay";
-import { ChevronLeft, ChevronRight, Play, Pause, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Sparkles, Gem } from "lucide-react";
 import Link from "next/link";
 
 interface BannerImage {
@@ -70,7 +70,7 @@ export default function Banner() {
   // Loading skeleton
   if (isLoading) {
     return (
-      <div className="relative w-full mb-16 sm:mb-20">
+      <div className="relative w-full ">
         <div className="px-4 sm:px-6 lg:px-0">
           <div className="">
             <Skeleton className="w-full h-[300px] sm:h-[450px] lg:h-[600px] rounded-2xl bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" />
@@ -95,7 +95,7 @@ export default function Banner() {
   }
 
   return (
-    <div className="relative w-full mb-16 sm:mb-20 overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-10 left-5 w-24 h-24 bg-gradient-to-br from-amber-300/20 to-orange-400/20 rounded-full blur-2xl animate-pulse" />
       <div className="absolute bottom-10 right-5 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-yellow-300/20 rounded-full blur-2xl animate-pulse delay-1000" />
@@ -115,7 +115,7 @@ export default function Banner() {
             <CarouselContent className="-ml-2 md:-ml-4">
               {images.map((image, index) => (
                 <CarouselItem key={image._id} className="pl-2 md:pl-4">
-                  <div className="relative group/item overflow-hidden rounded-2xl lg:rounded-3xl shadow-2xl">
+                  <div className="relative group/item overflow-hidden rounded-sm shadow-2xl">
                     {/* Main Image Container */}
                     <div className="relative h-[300px] sm:h-[450px] lg:h-[600px] bg-gradient-to-br from-amber-50 to-orange-50">
                       <Image
@@ -123,7 +123,7 @@ export default function Banner() {
                         width={1920}
                         src={image?.photo}
                         alt={image?.title || "Premium Ornament Banner"}
-                        className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-700 ease-out rounded-sm"
                         priority={index === 0}
                         quality={95}
                       />
@@ -175,7 +175,7 @@ export default function Banner() {
                       className="absolute top-6 right-6 w-12 h-12 border-2 border-white/30 rounded-full 
                                   flex items-center justify-center backdrop-blur-sm bg-white/10"
                     >
-                      <Sparkles className="w-6 h-6 text-white/80" />
+                      <Gem className="w-6 h-6 text-white/80" />
                     </div>
                   </div>
                 </CarouselItem>

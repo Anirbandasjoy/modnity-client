@@ -1,5 +1,12 @@
 "use client";
-import { ChevronDown, ChevronRight, Filter, X, Tag, DollarSign } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Filter,
+  X,
+  Tag,
+  DollarSign,
+} from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
@@ -88,7 +95,9 @@ const FilterCard: React.FC<FilterCardProps> = ({
               <div className="w-10 h-10 bg-orange-400 rounded-xl flex items-center justify-center">
                 <Tag className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-semibold text-gray-800">Categories</span>
+              <span className="text-lg font-semibold text-gray-800">
+                Categories
+              </span>
             </div>
             {isCategoryOpen ? (
               <ChevronDown className="w-5 h-5 text-gray-500 transition-transform duration-200" />
@@ -96,7 +105,7 @@ const FilterCard: React.FC<FilterCardProps> = ({
               <ChevronRight className="w-5 h-5 text-gray-500 transition-transform duration-200" />
             )}
           </button>
-          
+
           {isCategoryOpen && (
             <div className="px-6 pb-6 space-y-3 animate-in slide-in-from-top-2 duration-200">
               <RadioGroup
@@ -109,9 +118,9 @@ const FilterCard: React.FC<FilterCardProps> = ({
                 className="space-y-3"
               >
                 <div className="flex items-center space-x-3 group">
-                  <RadioGroupItem 
-                    value="" 
-                    id="all-desktop" 
+                  <RadioGroupItem
+                    value=""
+                    id="all-desktop"
                     className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                   <Label
@@ -127,8 +136,8 @@ const FilterCard: React.FC<FilterCardProps> = ({
                     className="flex items-center space-x-3 group"
                     key={category?._id}
                   >
-                    <RadioGroupItem 
-                      value={category._id} 
+                    <RadioGroupItem
+                      value={category._id}
                       id={`${category._id}-desktop`}
                       className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
                     />
@@ -144,7 +153,7 @@ const FilterCard: React.FC<FilterCardProps> = ({
             </div>
           )}
         </div>
-        
+
         {/* Price Range Filter */}
         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-200 hover:border-gray-200">
           <button
@@ -155,7 +164,9 @@ const FilterCard: React.FC<FilterCardProps> = ({
               <div className="w-10 h-10 bg-red-300 rounded-xl flex items-center justify-center">
                 <DollarSign className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-semibold text-gray-800">Price Range</span>
+              <span className="text-lg font-semibold text-gray-800">
+                Price Range
+              </span>
             </div>
             {isPriceOpen ? (
               <ChevronDown className="w-5 h-5 text-gray-500 transition-transform duration-200" />
@@ -163,13 +174,17 @@ const FilterCard: React.FC<FilterCardProps> = ({
               <ChevronRight className="w-5 h-5 text-gray-500 transition-transform duration-200" />
             )}
           </button>
-          
+
           {isPriceOpen && (
             <div className="px-6 pb-6 space-y-4 animate-in slide-in-from-top-2 duration-200">
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Minimum Price</Label>
+                <Label className="text-sm font-medium text-gray-700">
+                  Minimum Price
+                </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">৳</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                    ৳
+                  </span>
                   <Input
                     placeholder="0"
                     type="number"
@@ -179,9 +194,13 @@ const FilterCard: React.FC<FilterCardProps> = ({
                 </div>
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Maximum Price</Label>
+                <Label className="text-sm font-medium text-gray-700">
+                  Maximum Price
+                </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">৳</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                    ৳
+                  </span>
                   <Input
                     placeholder="Any"
                     type="number"
@@ -224,9 +243,11 @@ const FilterCard: React.FC<FilterCardProps> = ({
               <div className="w-8 h-8 bg-orange-400 rounded-lg flex items-center justify-center">
                 <Tag className="w-4 h-4 text-white" />
               </div>
-              <h3 className="text-base font-semibold text-gray-800">Categories</h3>
+              <h3 className="text-base font-semibold text-gray-800">
+                Categories
+              </h3>
             </div>
-            
+
             <RadioGroup
               defaultValue={categoryPrice}
               value={categoryPrice}
@@ -236,9 +257,9 @@ const FilterCard: React.FC<FilterCardProps> = ({
               }}
               className="space-y-3"
             >
-              <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                <RadioGroupItem 
-                  value="" 
+              <div className="flex items-center space-x-3 px-3 pt-2 rounded-xl hover:bg-gray-50 transition-colors">
+                <RadioGroupItem
+                  value=""
                   id="all-mobile"
                   className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
@@ -252,11 +273,11 @@ const FilterCard: React.FC<FilterCardProps> = ({
 
               {categories?.map((category) => (
                 <div
-                  className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 transition-colors"
+                  className="flex items-center space-x-3 px-3 pb-2 rounded-xl hover:bg-gray-50 transition-colors"
                   key={category?._id}
                 >
-                  <RadioGroupItem 
-                    value={category._id} 
+                  <RadioGroupItem
+                    value={category._id}
                     id={`${category._id}-mobile`}
                     className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
@@ -270,21 +291,27 @@ const FilterCard: React.FC<FilterCardProps> = ({
               ))}
             </RadioGroup>
           </div>
-          
+
           {/* Price Range Filter */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-red-300 rounded-lg flex items-center justify-center">
                 <DollarSign className="w-4 h-4 text-white" />
               </div>
-              <h3 className="text-base font-semibold text-gray-800">Price Range</h3>
+              <h3 className="text-base font-semibold text-gray-800">
+                Price Range
+              </h3>
             </div>
-            
+
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Minimum Price</Label>
+                <Label className="text-sm font-medium text-gray-700">
+                  Minimum Price
+                </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">৳</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                    ৳
+                  </span>
                   <Input
                     placeholder="0"
                     type="number"
@@ -294,9 +321,13 @@ const FilterCard: React.FC<FilterCardProps> = ({
                 </div>
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Maximum Price</Label>
+                <Label className="text-sm font-medium text-gray-700">
+                  Maximum Price
+                </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">৳</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                    ৳
+                  </span>
                   <Input
                     placeholder="Any"
                     type="number"

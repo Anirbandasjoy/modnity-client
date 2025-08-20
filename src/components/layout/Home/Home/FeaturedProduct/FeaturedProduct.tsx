@@ -124,7 +124,7 @@ export default function FeaturedProduct() {
   // Error State
   if (error) {
     return (
-      <div className="container mx-auto px-4 py-8 sm:py-12">
+      <div className="container mx-auto px-4 ">
         <div className="max-w-sm sm:max-w-md mx-auto text-center">
           <div className="border-2 border-red-200 rounded-lg p-6 sm:p-8">
             <div className="w-12 h-12 sm:w-16 sm:h-16 border-2 border-red-200 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -150,10 +150,10 @@ export default function FeaturedProduct() {
   }
 
   return (
-    <section className="py-24 sm:py-16 lg:py-28">
+    <section className="pt-10 lg:pb-20 pb-14">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile-Optimized Header */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 border border-amber-300 rounded-full mb-4 sm:mb-6">
             <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
             <span className="text-xs sm:text-sm font-medium text-amber-700 uppercase tracking-wide">
@@ -162,8 +162,10 @@ export default function FeaturedProduct() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4">
-            Featured 
-            <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Ornaments</span>
+            Featured
+            <span className="bg-gradient-to-r ml-4 from-amber-600 to-orange-600 bg-clip-text text-transparent">
+              Ornaments
+            </span>
           </h2>
 
           <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
@@ -190,18 +192,22 @@ export default function FeaturedProduct() {
                 >
                   <Filter className="w-4 h-4 text-gray-500" />
                   <span className="font-medium text-gray-700 capitalize flex-1 text-left">
-                    {selectedCategory === "all" ? "All Products" : selectedCategory}
+                    {selectedCategory === "all"
+                      ? "All Products"
+                      : selectedCategory}
                   </span>
-                  <ChevronDown 
+                  <ChevronDown
                     className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                      showAllCategories ? 'rotate-180' : ''
-                    }`} 
+                      showAllCategories ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
               </div>
 
               {/* Category Pills */}
-              <div className={`${showAllCategories ? 'block' : 'hidden'} sm:block`}>
+              <div
+                className={`${showAllCategories ? "block" : "hidden"} sm:block`}
+              >
                 <div className="flex items-start sm:items-center gap-3 mb-4">
                   <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mt-1 sm:mt-0 hidden sm:block" />
                   <div className="flex flex-wrap gap-2">
@@ -231,7 +237,8 @@ export default function FeaturedProduct() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             {!isLoading && (
               <span className="text-sm text-gray-600 font-medium order-2 sm:order-1">
-                {filteredProducts.length} Product{filteredProducts.length !== 1 ? 's' : ''}
+                {filteredProducts.length} Product
+                {filteredProducts.length !== 1 ? "s" : ""}
               </span>
             )}
 
@@ -333,7 +340,7 @@ export default function FeaturedProduct() {
           </div>
 
           {/* Mobile-Friendly Stats */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-6 sm:mt-8 text-xs sm:text-sm text-gray-600">
+          <div className="flex  flex-row items-center justify-center gap-4 sm:gap-8 mt-6 sm:mt-8 text-xs sm:text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
               <span>Premium Quality</span>

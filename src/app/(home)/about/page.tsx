@@ -1,12 +1,12 @@
-import React from 'react'
-import { AboutBreadcrumb } from './AboutBreadcrumb/AboutBreadcrumb'
-import AboutSection from '@/components/layout/Home/About/AboutSection/AboutSection';
+import React from "react";
+import { AboutBreadcrumb } from "./AboutBreadcrumb/AboutBreadcrumb";
+import AboutUs from "@/components/layout/Home/Home/AboutUs/AboutUs";
 
 export default function page() {
   return (
     <div>
       <AboutBreadcrumb />
-      <AboutSection/>
+      <AboutUs />
     </div>
   );
 }

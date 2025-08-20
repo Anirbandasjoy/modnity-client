@@ -48,7 +48,7 @@ export default function Footer() {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-gradient-to-r from-amber-500 to-amber-600 
+        className="absolute top-4 cursor-pointer right-4 sm:top-6 sm:right-6 bg-gradient-to-r from-amber-500 to-amber-600 
                    text-white p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 
                    hover:scale-110 hover:from-amber-600 hover:to-amber-700 z-10"
         aria-label="Scroll to top"

@@ -87,9 +87,7 @@ const Navbar = () => {
       {/* Main Navigation */}
       <nav
         className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? "border-b border-amber-100 backdrop-blur-lg "
-            : ""
+          isScrolled ? "border-b border-amber-100 backdrop-blur-lg " : ""
         }`}
       >
         <div className="">
@@ -415,11 +413,11 @@ const Navbar = () => {
                     <span className="truncate">modnity@gmail.com</span>
                   </a>
                   <a
-                    href="tel:0123456789"
+                    href="tel:01338782711"
                     className="flex items-center gap-3 text-gray-600 hover:text-amber-600 transition-colors"
                   >
                     <Phone size={18} className="flex-shrink-0" />
-                    <span>01772 838 734</span>
+                    <span>+880 133-8782711</span>
                   </a>
                 </div>
               </div>

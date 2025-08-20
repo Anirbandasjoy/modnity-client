@@ -33,10 +33,10 @@ export default function ShopCart() {
   }, []);
 
   return (
-    <div>
+    <div className="px-4 lg:px-0 ">
       <CartBreadcrumb />
-      <div className="px-[5%] bg-white">
-        <div className="flex flex-col lg:flex-row gap-5 pt-10 pb-20 max-w-screen-xl mx-auto">
+      <div className="">
+        <div className="flex flex-col-reverse lg:flex-row  pb-20 ">
           <CartTable
             cartProducts={cartProducts}
             setCartProducts={setCartProducts}
