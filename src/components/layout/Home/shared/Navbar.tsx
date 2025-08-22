@@ -10,7 +10,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { useHandleFindProductQuery } from "@/redux/features/product/productApi";
 import { useLoggedInUserQuery } from "@/redux/features/users/userApi";
-import { Phone, Search, ShoppingBag, Gem, X } from "lucide-react";
+import { Phone, Search, ShoppingBag, X } from "lucide-react";
 
 interface IData {
   _id: string;
@@ -97,19 +97,23 @@ const Navbar = () => {
               href="/"
               className="flex items-center gap-2 lg:gap-3 group flex-shrink-0"
             >
-              <div className="relative">
+              {/* <div className="relative">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                   <Gem className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
                 </div>
                 <div className="absolute -top-0.5 -right-0.5 w-2 h-2 sm:w-3 sm:h-3 bg-amber-300 rounded-full animate-pulse"></div>
-              </div>
-              <div className="block">
+              </div> */}
+              {/* <div className="block">
                 <h1 className="text-[15px] sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">
                   Modnity
                 </h1>
                 <p className="text-[10px] text-gray-500 font-medium leading-none">
                   Premium Ornaments
                 </p>
+              </div> */}
+
+              <div className="max-w-[160px] -ml-4">
+                <Image src="./logo.svg" width={1000} height={1000} alt="logo" />
               </div>
             </Link>
 
@@ -356,8 +360,8 @@ const Navbar = () => {
           >
             <div className="p-4 sm:p-6">
               {/* Mobile Menu Header */}
-              <div className="flex items-center justify-between mb-6 sm:mb-8">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between ">
+                {/* <div className="flex items-center gap-3">
                   <div
                     className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full 
                                flex items-center justify-center shadow-lg"
@@ -368,7 +372,18 @@ const Navbar = () => {
                     <h2 className="text-xl font-bold text-gray-800">Modnity</h2>
                     <p className="text-xs text-gray-500">Premium Ornaments</p>
                   </div>
+                </div> */}
+
+                <div className="flex-shrink-0">
+                  <Image
+                    src="/logo.svg"
+                    width={160}
+                    height={60}
+                    alt="logo"
+                    className="w-24 sm:w-32 h-auto"
+                  />
                 </div>
+
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 rounded-full hover:bg-gray-100 transition-colors"
@@ -403,21 +418,45 @@ const Navbar = () => {
               </div>
 
               {/* Mobile Menu Footer */}
+              {/* Mobile Menu Footer */}
               <div className="mt-8 pt-6 border-t border-gray-100">
-                <div className="space-y-3 text-sm">
+                <div className="space-y-4">
+                  {/* Email */}
                   <a
                     href="mailto:modnity@gmail.com"
-                    className="flex items-center gap-3 text-gray-600 hover:text-amber-600 transition-colors"
+                    className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 
+                 border border-amber-100 shadow-sm hover:shadow-md hover:scale-[1.02] 
+                 transition-all duration-300 group"
                   >
-                    <MdEmail size={18} className="flex-shrink-0" />
-                    <span className="truncate">modnity@gmail.com</span>
+                    <div
+                      className="w-10 h-10 flex items-center justify-center rounded-full 
+                   bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-md 
+                   group-hover:scale-110 transition-transform"
+                    >
+                      <MdEmail size={18} />
+                    </div>
+                    <span className="font-medium text-gray-800 group-hover:text-amber-700 truncate">
+                      modnity@gmail.com
+                    </span>
                   </a>
+
+                  {/* Phone */}
                   <a
                     href="tel:01338782711"
-                    className="flex items-center gap-3 text-gray-600 hover:text-amber-600 transition-colors"
+                    className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 
+                 border border-amber-100 shadow-sm hover:shadow-md hover:scale-[1.02] 
+                 transition-all duration-300 group"
                   >
-                    <Phone size={18} className="flex-shrink-0" />
-                    <span>+880 133-8782711</span>
+                    <div
+                      className="w-10 h-10 flex items-center justify-center rounded-full 
+                   bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-md 
+                   group-hover:scale-110 transition-transform"
+                    >
+                      <Phone size={18} />
+                    </div>
+                    <span className="font-medium text-gray-800 group-hover:text-amber-700">
+                      +880 133-8782711
+                    </span>
                   </a>
                 </div>
               </div>
