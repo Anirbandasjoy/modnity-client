@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 // Components
-import { ImageUploader } from "@/components/layout/dashboard/shared/inputs/ImageInput";
+
 import { FormItem, FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import GlobalHistoryModal from "@/components/layout/dashboard/shared/GlobalHistoryModal/GlobalHistoryModal";
@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useHandleFindCategoryQuery } from "@/redux/features/categories/categoriesApi";
+import { ImageUpdateUploader } from "@/components/layout/dashboard/shared/inputs/ImageUpdateInput";
 // Types
 interface IFormInput {
   productName: string;
@@ -175,6 +176,14 @@ const UpdatePage: React.FC<{ params: Promise<Params> }> = ({ params }) => {
   const [metaDataHistory, setMetaDataHistory] = useState(
     getInitialMetaDataHistory
   );
+
+  const [removedDefaultImageUrls, setRemovedDefaultImageUrls] = useState<
+    string[]
+  >([]);
+  const handleRemoveDefaultImage = (url: string) => {
+    setRemovedDefaultImageUrls((prev) => [...prev, url]);
+  };
+
   const [handleUpdateProduct, { isLoading }] = useHandleUpdateProductMutation();
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
   const router = useRouter();
@@ -195,10 +204,6 @@ const UpdatePage: React.FC<{ params: Promise<Params> }> = ({ params }) => {
   });
 
   console.log({ error });
-
-  let updatedImage = data?.payload?.productImage;
-  // image
-
   // Resolve the params promise and set the slug
   useEffect(() => {
     const resolveParams = async () => {
@@ -219,21 +224,30 @@ const UpdatePage: React.FC<{ params: Promise<Params> }> = ({ params }) => {
   const methods = useForm<IFormInput>({ defaultValues });
 
   const onSubmit: SubmitHandler<IFormInput> = async () => {
-    if (!updatedImage) {
-      return toast.error("Please upload at least one image.");
-    }
-
-    setIsImageUploading(true);
-
     try {
+      setIsImageUploading(true);
+      const defaultImages = data?.payload?.productImage
+        ? Array.isArray(data.payload.productImage)
+          ? data.payload.productImage
+          : [data.payload.productImage]
+        : [];
+
+      const remainingDefaultImages = defaultImages.filter(
+        (url: string) => !removedDefaultImageUrls.includes(url)
+      );
+      let imageURLs = [...remainingDefaultImages];
       if (images.length > 0) {
-        const imageURLs = (
-          await Promise.all(images?.map((img) => uploadImageToImageBB(img)))
-        ).filter((url): url is string => !!url);
-        updatedImage = imageURLs[0];
-        if (imageURLs.length === 0) {
-          return toast.error("Failed to upload images.");
-        }
+        const uploadedImages = await Promise.all(
+          images.map((image) => uploadImageToImageBB(image))
+        );
+        imageURLs = [
+          ...imageURLs,
+          ...(uploadedImages.filter((url) => url !== null) as string[]),
+        ];
+      }
+
+      if (imageURLs.length === 0) {
+        throw new Error("At least one image is required");
       }
 
       const payload = {
@@ -252,13 +266,13 @@ const UpdatePage: React.FC<{ params: Promise<Params> }> = ({ params }) => {
           dhakaCityOuter: Number(metaData.shippingDhakaCityOuter),
           outsideDhaka: Number(metaData.shippingOutsideDhaka),
         },
-        productImage: updatedImage,
+        productImage: imageURLs,
         seo: {
           tag: metaData?.seoTag,
           description: metaData?.seoDescription,
         },
-        
       };
+      console.log(payload)
       await handleUpdateProduct(payload).unwrap();
       toast.success("Data updated successfully!");
       setImages([]);
@@ -374,14 +388,14 @@ const UpdatePage: React.FC<{ params: Promise<Params> }> = ({ params }) => {
 
           <FormItem>
             <FormLabel>Image</FormLabel>
-            <ImageUploader
+
+            <ImageUpdateUploader
               images={images}
               setImages={setImages}
               mode="update"
-              multiple={false}
-              defaultImages={
-                data?.payload?.productImage ? [data?.payload?.productImage] : []
-              }
+              multiple={true}
+              defaultImages={data?.payload?.productImage || []}
+              onRemoveDefaultImage={handleRemoveDefaultImage} // Add this prop
             />
           </FormItem>
 

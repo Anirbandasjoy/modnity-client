@@ -251,7 +251,7 @@ const ManagePage = () => {
                   <Image
                     width={150}
                     height={100}
-                    src={item.productImage}
+                    src={item?.productImage[0]}
                     alt={item.productName}
                     className="rounded-md object-cover h-20 w-32"
                   />
