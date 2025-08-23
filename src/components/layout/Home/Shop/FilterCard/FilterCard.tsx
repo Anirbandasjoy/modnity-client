@@ -6,6 +6,7 @@ import {
   X,
   Tag,
   DollarSign,
+  Loader2,
 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -21,6 +22,7 @@ interface FilterCardProps {
   setMaxPrice: any;
   setCategoryPrice: any;
   categoryPrice: any;
+  isLoading?: boolean; // Add loading state prop
 }
 
 // 📝 data Interface - Defines structure for each data object
@@ -33,6 +35,18 @@ interface IData {
   updatedAt: string; // ISO date string when the data was last updated
 }
 
+// Skeleton component for loading states
+const CategorySkeleton = () => (
+  <div className="space-y-3">
+    {[...Array(5)].map((_, i) => (
+      <div key={i} className="flex items-center space-x-3 animate-pulse">
+        <div className="w-4 h-4 bg-gray-300 rounded-full"></div>
+        <div className="h-4 bg-gray-300 rounded flex-1"></div>
+      </div>
+    ))}
+  </div>
+);
+
 const FilterCard: React.FC<FilterCardProps> = ({
   setIsOpen,
   isOpen,
@@ -41,25 +55,40 @@ const FilterCard: React.FC<FilterCardProps> = ({
   setMaxPrice,
   setCategoryPrice,
   categoryPrice,
+  isLoading = false,
 }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
   const [isPriceOpen, setIsPriceOpen] = useState(true);
+  const [isFiltering, setIsFiltering] = useState(false);
+
   // Query to fetch all data based on pagination and search text
-  const { data } = useHandleFindCategoryQuery({
+  const { data, isLoading: categoriesLoading } = useHandleFindCategoryQuery({
     page: 1, // Current page for pagination
     limit: 100, // Number of items per page
     search: "", // The search text to filter data
   });
   const categories: IData[] = data?.payload || [];
 
-  const handleMinPrice = (data: number) => {
+  const handleMinPrice = async (data: number) => {
+    setIsFiltering(true);
     setMinPrice(data);
-    refetch();
+    await refetch();
+    // Add small delay to show loading state
+    setTimeout(() => setIsFiltering(false), 500);
   };
 
-  const handleMaxPrice = (data: number) => {
+  const handleMaxPrice = async (data: number) => {
+    setIsFiltering(true);
     setMaxPrice(data);
-    refetch();
+    await refetch();
+    setTimeout(() => setIsFiltering(false), 500);
+  };
+
+  const handleCategoryChange = async (value: string) => {
+    setIsFiltering(true);
+    setCategoryPrice(value);
+    await refetch();
+    setTimeout(() => setIsFiltering(false), 500);
   };
 
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -83,6 +112,18 @@ const FilterCard: React.FC<FilterCardProps> = ({
 
   return (
     <>
+      {/* Loading Overlay */}
+      {(isLoading || isFiltering) && (
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-6 flex items-center gap-3 shadow-xl">
+            <Loader2 className="w-5 h-5 animate-spin text-orange-400" />
+            <span className="text-gray-700 font-medium">
+              {isFiltering ? "Filtering..." : "Loading..."}
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Desktop Filter */}
       <div className="w-80 space-y-4 h-fit hidden sm:block">
         {/* Category Filter */}
@@ -90,10 +131,15 @@ const FilterCard: React.FC<FilterCardProps> = ({
           <button
             onClick={() => setIsCategoryOpen(!isCategoryOpen)}
             className="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50/50 transition-colors duration-200"
+            disabled={isLoading || isFiltering}
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-orange-400 rounded-xl flex items-center justify-center">
-                <Tag className="w-5 h-5 text-white" />
+                {isLoading || isFiltering ? (
+                  <Loader2 className="w-5 h-5 text-white animate-spin" />
+                ) : (
+                  <Tag className="w-5 h-5 text-white" />
+                )}
               </div>
               <span className="text-lg font-semibold text-gray-800">
                 Categories
@@ -108,48 +154,52 @@ const FilterCard: React.FC<FilterCardProps> = ({
 
           {isCategoryOpen && (
             <div className="px-6 pb-6 space-y-3 animate-in slide-in-from-top-2 duration-200">
-              <RadioGroup
-                defaultValue={categoryPrice}
-                value={categoryPrice}
-                onValueChange={(value) => {
-                  setCategoryPrice(value);
-                  refetch();
-                }}
-                className="space-y-3"
-              >
-                <div className="flex items-center space-x-3 group">
-                  <RadioGroupItem
-                    value=""
-                    id="all-desktop"
-                    className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <Label
-                    htmlFor="all-desktop"
-                    className="text-gray-700 font-medium cursor-pointer group-hover:text-gray-900 transition-colors"
-                  >
-                    All Categories
-                  </Label>
-                </div>
-
-                {categories?.map((category) => (
-                  <div
-                    className="flex items-center space-x-3 group"
-                    key={category?._id}
-                  >
+              {categoriesLoading || isFiltering ? (
+                <CategorySkeleton />
+              ) : (
+                <RadioGroup
+                  defaultValue={categoryPrice}
+                  value={categoryPrice}
+                  onValueChange={handleCategoryChange}
+                  className="space-y-3"
+                  disabled={isLoading || isFiltering}
+                >
+                  <div className="flex items-center space-x-3 group">
                     <RadioGroupItem
-                      value={category._id}
-                      id={`${category._id}-desktop`}
+                      value=""
+                      id="all-desktop"
                       className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
+                      disabled={isLoading || isFiltering}
                     />
                     <Label
-                      htmlFor={`${category._id}-desktop`}
-                      className="text-gray-700 font-medium cursor-pointer group-hover:text-gray-900 transition-colors flex-1"
+                      htmlFor="all-desktop"
+                      className="text-gray-700 font-medium cursor-pointer group-hover:text-gray-900 transition-colors"
                     >
-                      {category.categoryName}
+                      All Categories
                     </Label>
                   </div>
-                ))}
-              </RadioGroup>
+
+                  {categories?.map((category) => (
+                    <div
+                      className="flex items-center space-x-3 group"
+                      key={category?._id}
+                    >
+                      <RadioGroupItem
+                        value={category._id}
+                        id={`${category._id}-desktop`}
+                        className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
+                        disabled={isLoading || isFiltering}
+                      />
+                      <Label
+                        htmlFor={`${category._id}-desktop`}
+                        className="text-gray-700 font-medium cursor-pointer group-hover:text-gray-900 transition-colors flex-1"
+                      >
+                        {category.categoryName}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              )}
             </div>
           )}
         </div>
@@ -159,10 +209,15 @@ const FilterCard: React.FC<FilterCardProps> = ({
           <button
             onClick={() => setIsPriceOpen(!isPriceOpen)}
             className="w-full p-6 flex items-center justify-between text-left hover:bg-gray-50/50 transition-colors duration-200"
+            disabled={isLoading || isFiltering}
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-red-300 rounded-xl flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-white" />
+                {isLoading || isFiltering ? (
+                  <Loader2 className="w-5 h-5 text-white animate-spin" />
+                ) : (
+                  <DollarSign className="w-5 h-5 text-white" />
+                )}
               </div>
               <span className="text-lg font-semibold text-gray-800">
                 Price Range
@@ -190,7 +245,11 @@ const FilterCard: React.FC<FilterCardProps> = ({
                     type="number"
                     onChange={(e) => handleMinPrice(Number(e.target.value))}
                     className="pl-8 border-gray-200 focus:border-blue-400 focus:ring-blue-400 rounded-xl transition-all duration-200"
+                    disabled={isLoading || isFiltering}
                   />
+                  {isFiltering && (
+                    <Loader2 className="w-4 h-4 animate-spin text-orange-400 absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  )}
                 </div>
               </div>
               <div className="space-y-2">
@@ -206,7 +265,11 @@ const FilterCard: React.FC<FilterCardProps> = ({
                     type="number"
                     onChange={(e) => handleMaxPrice(Number(e.target.value))}
                     className="pl-8 border-gray-200 focus:border-blue-400 focus:ring-blue-400 rounded-xl transition-all duration-200"
+                    disabled={isLoading || isFiltering}
                   />
+                  {isFiltering && (
+                    <Loader2 className="w-4 h-4 animate-spin text-orange-400 absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  )}
                 </div>
               </div>
             </div>
@@ -224,13 +287,20 @@ const FilterCard: React.FC<FilterCardProps> = ({
         <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-orange-400 rounded-lg flex items-center justify-center">
-              <Filter className="w-4 h-4 text-white" />
+              {isLoading || isFiltering ? (
+                <Loader2 className="w-4 h-4 text-white animate-spin" />
+              ) : (
+                <Filter className="w-4 h-4 text-white" />
+              )}
             </div>
-            <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
+            <h2 className="text-lg font-semibold text-gray-800">
+              {isFiltering ? "Filtering..." : "Filters"}
+            </h2>
           </div>
           <button
             onClick={() => setIsOpen(false)}
             className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
+            disabled={isLoading || isFiltering}
           >
             <X className="w-4 h-4 text-gray-600" />
           </button>
@@ -241,62 +311,74 @@ const FilterCard: React.FC<FilterCardProps> = ({
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-orange-400 rounded-lg flex items-center justify-center">
-                <Tag className="w-4 h-4 text-white" />
+                {isLoading || isFiltering ? (
+                  <Loader2 className="w-4 h-4 text-white animate-spin" />
+                ) : (
+                  <Tag className="w-4 h-4 text-white" />
+                )}
               </div>
               <h3 className="text-base font-semibold text-gray-800">
                 Categories
               </h3>
             </div>
 
-            <RadioGroup
-              defaultValue={categoryPrice}
-              value={categoryPrice}
-              onValueChange={(value) => {
-                setCategoryPrice(value);
-                refetch();
-              }}
-              className="space-y-3"
-            >
-              <div className="flex items-center space-x-3 px-3 pt-2 rounded-xl hover:bg-gray-50 transition-colors">
-                <RadioGroupItem
-                  value=""
-                  id="all-mobile"
-                  className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <Label
-                  htmlFor="all-mobile"
-                  className="text-gray-700 font-medium cursor-pointer flex-1"
-                >
-                  All Categories
-                </Label>
-              </div>
-
-              {categories?.map((category) => (
-                <div
-                  className="flex items-center space-x-3 px-3 pb-2 rounded-xl hover:bg-gray-50 transition-colors"
-                  key={category?._id}
-                >
+            {categoriesLoading || isFiltering ? (
+              <CategorySkeleton />
+            ) : (
+              <RadioGroup
+                defaultValue={categoryPrice}
+                value={categoryPrice}
+                onValueChange={handleCategoryChange}
+                className="space-y-3"
+                disabled={isLoading || isFiltering}
+              >
+                <div className="flex items-center space-x-3 px-3 pt-2 rounded-xl hover:bg-gray-50 transition-colors">
                   <RadioGroupItem
-                    value={category._id}
-                    id={`${category._id}-mobile`}
+                    value=""
+                    id="all-mobile"
                     className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
+                    disabled={isLoading || isFiltering}
                   />
                   <Label
-                    htmlFor={`${category._id}-mobile`}
+                    htmlFor="all-mobile"
                     className="text-gray-700 font-medium cursor-pointer flex-1"
                   >
-                    {category.categoryName}
+                    All Categories
                   </Label>
                 </div>
-              ))}
-            </RadioGroup>
+
+                {categories?.map((category) => (
+                  <div
+                    className="flex items-center space-x-3 px-3 pb-2 rounded-xl hover:bg-gray-50 transition-colors"
+                    key={category?._id}
+                  >
+                    <RadioGroupItem
+                      value={category._id}
+                      id={`${category._id}-mobile`}
+                      className="border-2 border-gray-300 text-blue-600 focus:ring-blue-500"
+                      disabled={isLoading || isFiltering}
+                    />
+                    <Label
+                      htmlFor={`${category._id}-mobile`}
+                      className="text-gray-700 font-medium cursor-pointer flex-1"
+                    >
+                      {category.categoryName}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            )}
           </div>
 
           {/* Price Range Filter */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-red-300 rounded-lg flex items-center justify-center">
-                <DollarSign className="w-4 h-4 text-white" />
+                {isLoading || isFiltering ? (
+                  <Loader2 className="w-4 h-4 text-white animate-spin" />
+                ) : (
+                  <DollarSign className="w-4 h-4 text-white" />
+                )}
               </div>
               <h3 className="text-base font-semibold text-gray-800">
                 Price Range
@@ -317,7 +399,11 @@ const FilterCard: React.FC<FilterCardProps> = ({
                     type="number"
                     onChange={(e) => handleMinPrice(Number(e.target.value))}
                     className="pl-8 border-gray-200 focus:border-blue-400 focus:ring-blue-400 rounded-xl"
+                    disabled={isLoading || isFiltering}
                   />
+                  {isFiltering && (
+                    <Loader2 className="w-4 h-4 animate-spin text-orange-400 absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  )}
                 </div>
               </div>
               <div className="space-y-2">
@@ -333,7 +419,11 @@ const FilterCard: React.FC<FilterCardProps> = ({
                     type="number"
                     onChange={(e) => handleMaxPrice(Number(e.target.value))}
                     className="pl-8 border-gray-200 focus:border-blue-400 focus:ring-blue-400 rounded-xl"
+                    disabled={isLoading || isFiltering}
                   />
+                  {isFiltering && (
+                    <Loader2 className="w-4 h-4 animate-spin text-orange-400 absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  )}
                 </div>
               </div>
             </div>
