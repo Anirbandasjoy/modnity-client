@@ -217,7 +217,7 @@ const AddPage = () => {
           dhakaCityOuter: Number(metaData.shippingDhakaCityOuter),
           outsideDhaka: Number(metaData.shippingOutsideDhaka),
         },
-        productImage: imageURLs[0],
+        productImage: imageURLs,
         seo: { tag: metaData.seoTag, description: metaData.seoDescription },
       };
 
@@ -284,7 +284,7 @@ const AddPage = () => {
               images={images}
               setImages={setImages}
               mode="add"
-              multiple
+              multiple={true}
             />
           </FormItem>
 

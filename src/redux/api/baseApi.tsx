@@ -6,7 +6,8 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 
-export const baseApi = "https://modnity-server.vercel.app/api/v1";
+// export const baseApi = "https://modnity-server.vercel.app/api/v1";
+export const baseApi = "http://localhost:5000/api/v1";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseApi,
