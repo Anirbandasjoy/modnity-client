@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: "Modnity",
     images: [
       {
-        url: "https://modnity.com/about.png",
+        url: "https://i.ibb.co.com/0Vr4fNz5/main-Image-1.webp",
         width: 1200,
         height: 630,
         alt: "Modnity Ornaments",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     title: "Modnity | Ornament Shop",
     description:
       "Shop elegant, handcrafted ornaments and jewelry from Modnity. Perfect for every occasion.",
-    images: ["https://modnity.com/about.png"],
+    images: ["https://i.ibb.co.com/0Vr4fNz5/main-Image-1.webp"],
     creator: "@modnity",
   },
 
