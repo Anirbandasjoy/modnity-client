@@ -13,7 +13,7 @@ export default function ShopCart() {
   useEffect(() => {
     const loadCartData = async () => {
       const storedCart = JSON.parse(
-        localStorage.getItem("ponnoBariCart") || "[]"
+        localStorage.getItem("modnityCart") || "[]"
       );
 
       const responses: any = await Promise.all(

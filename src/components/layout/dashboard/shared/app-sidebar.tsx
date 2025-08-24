@@ -40,7 +40,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     teams: [
       {
-        name: "Borkotmoy Ponno",
+        name: "Modnity",
         logo: BadgeCheck,
         plan: "Dhaka, Bangladesh. ",
         url: "/",

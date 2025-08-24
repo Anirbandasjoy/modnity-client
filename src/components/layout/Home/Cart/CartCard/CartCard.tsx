@@ -103,7 +103,7 @@ export default function CartCard({ cartProducts, setCartProducts }: any) {
 
       toast.success("Order Placed Successfully!");
       localStorage.setItem("orderData", JSON.stringify(response));
-      localStorage.removeItem("ponnoBariCart");
+      localStorage.removeItem("modnityCart");
       setCartProducts([]);
 
       router.push("/success");

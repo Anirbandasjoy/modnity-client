@@ -15,9 +15,7 @@ function ProductCard({ product }: any) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleAddToCart = () => {
-    const storedCart = JSON.parse(
-      localStorage.getItem("ponnoBariCart") || "[]"
-    );
+    const storedCart = JSON.parse(localStorage.getItem("modnityCart") || "[]");
 
     const existingItemIndex = storedCart.findIndex(
       (item: { product: string }) => item.product === product.slug
@@ -25,7 +23,7 @@ function ProductCard({ product }: any) {
 
     if (existingItemIndex === -1) {
       storedCart.push({ product: product.slug, quantity: 1 });
-      localStorage.setItem("ponnoBariCart", JSON.stringify(storedCart));
+      localStorage.setItem("modnityCart", JSON.stringify(storedCart));
       toast.success("Added to cart successfully!", {
         icon: "🛍️",
         style: {
@@ -132,7 +130,7 @@ function ProductCard({ product }: any) {
         <Image
           width={400}
           height={400}
-          src={product?.productImage}
+          src={product?.productImage?.[0]}
           alt={stripHtmlTags(product?.productName)}
           className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
             imageLoaded ? "opacity-100" : "opacity-0"
@@ -204,7 +202,8 @@ function ProductCard({ product }: any) {
 
         {/* Product Title - More Space Efficient */}
         <div className="min-h-[2rem] sm:min-h-[2.5rem]">
-          <h3
+          <Link
+            href={`/step/${product?.slug}`}
             className="text-gray-900 font-semibold leading-tight line-clamp-2 
                      group-hover:text-amber-700 transition-colors duration-200
                      text-sm sm:text-base"

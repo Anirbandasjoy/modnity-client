@@ -56,16 +56,16 @@ export default function ShopPage() {
   }, [categoryPrice, refetch]);
 
   useEffect(() => {
-  if (isOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  return () => {
-    document.body.style.overflow = "auto";
-  };
-}, [isOpen]);
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   return (
     <div>
@@ -78,8 +78,9 @@ export default function ShopPage() {
           >
             Filter
             <FaAngleRight
-              className={`text-forest-green mt-1 text-xl transform duration-300 ${isOpen ? "rotate-90" : "rotate-0"
-                }`}
+              className={`text-forest-green mt-1 text-xl transform duration-300 ${
+                isOpen ? "rotate-90" : "rotate-0"
+              }`}
             />
           </div>
           <div className="flex gap-5">

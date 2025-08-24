@@ -2,7 +2,6 @@ import Navbar from "@/components/layout/Home/shared/Navbar";
 import ShopDetails from "./ShopDetails";
 import Footer from "@/components/layout/Home/shared/Footer";
 
-
 export async function generateMetadata({ params }: any) {
   const { slug } = params;
   try {
@@ -109,10 +108,16 @@ export default function Page({ params }: any) {
   const { slug } = params;
 
   return (
-    <main className=" mx-auto bg-[#FAF9F6]">
-      <Navbar />
-      <ShopDetails slug={slug} />
-      <Footer />
+    <main className=" ">
+      <div className=" max-w-7xl mx-auto">
+        <Navbar />
+        <ShopDetails slug={slug} />
+      </div>
+      <div className="bg-[#fef3c747]">
+        <div className="max-w-7xl mx-auto">
+          <Footer />
+        </div>
+      </div>
     </main>
   );
 }

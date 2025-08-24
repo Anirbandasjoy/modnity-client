@@ -362,7 +362,7 @@ export default function ShopCart() {
                               <div className="flex items-center gap-4">
                                 <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-gray-200">
                                   <Image
-                                    src={item.product.productImage}
+                                    src={item.product.productImage?.[0]}
                                     fill
                                     alt={item.product.productName}
                                     className="object-cover"

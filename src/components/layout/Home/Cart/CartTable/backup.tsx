@@ -28,7 +28,7 @@ export default function CartTable({
       product: item.payload.slug,
       quantity: item.quantity,
     }));
-    localStorage.setItem("ponnoBariCart", JSON.stringify(simplified));
+    localStorage.setItem("modnityCart", JSON.stringify(simplified));
   };
 
   const updateQuantity = (slug: string, type: "increment" | "decrement") => {
@@ -67,7 +67,7 @@ export default function CartTable({
   const removedFromCart = (slug: string) => {
     // Step 1: Get stored cart IDs
     const storedCart: string[] = JSON.parse(
-      localStorage.getItem("ponnoBariCart") || "[]"
+      localStorage.getItem("modnityCart") || "[]"
     );
 
     // Step 2: Remove the selected product ID
@@ -76,7 +76,7 @@ export default function CartTable({
     );
 
     // Step 3: Update localStorage with the correct key
-    localStorage.setItem("ponnoBariCart", JSON.stringify(updatedCart));
+    localStorage.setItem("modnityCart", JSON.stringify(updatedCart));
 
     // Step 4: Update UI (cartProducts state)
     setCartProducts((prev: any[]) =>

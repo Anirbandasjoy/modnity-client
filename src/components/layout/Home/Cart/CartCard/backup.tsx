@@ -89,7 +89,7 @@ export default function CartCard({
       // Then navigate to success page
       router.push(`/success`);
       toast.success("Order Placed Successfully!");
-      localStorage.removeItem("ponnoBariCart");
+      localStorage.removeItem("modnityCart");
       setCartProducts([]); // if using useState
 
       window.dataLayer?.push({
@@ -116,7 +116,6 @@ export default function CartCard({
       });
     } catch (error: any) {
       toast.error(error?.data?.message || "An error occurred");
-  
     }
   };
 

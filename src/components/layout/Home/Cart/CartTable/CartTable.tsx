@@ -29,7 +29,7 @@ export default function CartTable({
       product: item.payload.slug,
       quantity: item.quantity,
     }));
-    localStorage.setItem("ponnoBariCart", JSON.stringify(simplified));
+    localStorage.setItem("modnityCart", JSON.stringify(simplified));
     console.log(simplified);
   };
 
@@ -87,14 +87,14 @@ export default function CartTable({
 
   const removedFromCart = (slug: string) => {
     const storedCart: { product: string; quantity: number }[] = JSON.parse(
-      localStorage.getItem("ponnoBariCart") || "[]"
+      localStorage.getItem("modnityCart") || "[]"
     );
 
     const updatedCart = storedCart.filter(
       (product) => product.product !== slug
     );
 
-    localStorage.setItem("ponnoBariCart", JSON.stringify(updatedCart));
+    localStorage.setItem("modnityCart", JSON.stringify(updatedCart));
 
     setCartProducts((prev: any[]) =>
       prev.filter((item) => item?.payload?.slug !== slug)
@@ -155,8 +155,8 @@ export default function CartTable({
         Your cart is empty
       </h2>
       <p className="text-gray-500 text-center  mb-6 ">
-        Looks like you haven&#39;t <br /> added anything to your cart yet. Discover our
-        amazing products and start shopping!
+        Looks like you haven&#39;t <br /> added anything to your cart yet.
+        Discover our amazing products and start shopping!
       </p>
       <button
         onClick={() => window.history.back()}
@@ -224,7 +224,7 @@ export default function CartTable({
                           <Image
                             height={64}
                             width={64}
-                            src={payload?.productImage}
+                            src={payload?.productImage?.[0]}
                             alt={payload?.productName}
                             className="rounded-xl object-cover shadow-sm"
                           />

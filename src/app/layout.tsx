@@ -10,12 +10,9 @@ import {
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import ReduxWrapper from "@/redux/ReduxWrapper";
-// import TawkToChat from "@/components/TawkToChat";
-// import CallButton from "@/components/layout/Home/shared/CallButton";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { GTMPageViewTracker } from "@/components/GTMPageViewTracker";
 import RightClickDisable from "@/components/RightClickDisable";
-// import FacebookMessengerButton from "@/components/layout/Home/shared/MessengerChat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,8 +46,52 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Modify",
-  description: "Modnity description",
+  title: "Modnity | Ornament Shop",
+  description:
+    "Modnity is your trusted ornament shop offering elegant, handcrafted jewelry and timeless accessories. Perfect for adding beauty and style to every occasion.",
+
+  keywords: [
+    "ornaments",
+    "jewelry",
+    "handmade jewelry",
+    "bangles",
+    "necklaces",
+    "earrings",
+    "Modnity ornament shop",
+  ],
+
+  authors: [{ name: "Modnity" }],
+  creator: "Modnity",
+  publisher: "Modnity",
+
+  openGraph: {
+    title: "Modnity | Ornament Shop",
+    description:
+      "Discover timeless ornaments and elegant jewelry at Modnity. Shop handcrafted pieces that bring beauty, tradition, and modern style together.",
+    url: "https://modnity.com",
+    siteName: "Modnity",
+    images: [
+      {
+        url: "https://modnity.com/about.png",
+        width: 1200,
+        height: 630,
+        alt: "Modnity Ornaments",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Modnity | Ornament Shop",
+    description:
+      "Shop elegant, handcrafted ornaments and jewelry from Modnity. Perfect for every occasion.",
+    images: ["https://modnity.com/about.png"],
+    creator: "@modnity",
+  },
+
+  metadataBase: new URL("https://modnity.com"),
 };
 
 export default function RootLayout({
@@ -70,11 +111,6 @@ export default function RootLayout({
           <RightClickDisable />
           <main>{children}</main>
           <Toaster position="top-center" reverseOrder={false} />
-          <div className="">
-            {/* <FacebookMessengerButton />
-            <CallButton />
-            <TawkToChat /> */}
-          </div>
         </body>
       </ReduxWrapper>
     </html>
